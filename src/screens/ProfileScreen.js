@@ -57,8 +57,8 @@ const ProfileScreen = () => {
           <View style={styles.avatarContainer}>
             <Feather name="user" size={40} color="#fff" />
           </View>
-          <Text style={styles.profileName}>John Doe</Text>
-          <Text style={styles.profileEmail}>john.doe@example.com</Text>
+          <Text style={styles.profileName}>Kaweesha Nethmina</Text>
+          <Text style={styles.profileEmail}>Kaweesha.nj@gmail.com</Text>
           <TouchableOpacity 
             style={styles.editProfileButton}
             onPress={() => handleMenuPress('Edit Profile')}
