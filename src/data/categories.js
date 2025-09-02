@@ -55,4 +55,11 @@ export const categories = [
     color: '#5F27CD',
     image: 'https://via.placeholder.com/100x100/5F27CD/FFFFFF?text=Services',
   },
+  {
+    id: '9',
+    name: 'Education',
+    icon: 'book-open',
+    color: '#3742fa',
+    image: 'https://via.placeholder.com/100x100/3742fa/FFFFFF?text=Education',
+  },
 ];

@@ -76,10 +76,11 @@ const SearchScreen = ({ navigation }) => {
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Browse Categories</Text>
           <FlatList
+            key="searchCategories3Columns"
             data={categories}
             renderItem={renderCategoryItem}
             keyExtractor={(item) => item.id}
-            numColumns={4}
+            numColumns={3}
             scrollEnabled={false}
             contentContainerStyle={styles.categoriesContainer}
           />
@@ -159,7 +160,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   categoriesContainer: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 8,
+    justifyContent: 'space-between',
+    alignItems: 'stretch',
   },
   popularSearches: {
     flexDirection: 'row',

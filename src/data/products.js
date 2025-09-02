@@ -142,6 +142,85 @@ export const products = {
       seller: 'City Properties',
       phone: '+94 77 333 4444'
     }
+  ],
+  '5': [ // Mobile Phones
+    {
+      id: 'phone1',
+      title: 'iPhone 14 Pro Max',
+      price: 'Rs. 320,000',
+      location: 'Colombo 1',
+      image: 'https://via.placeholder.com/300x200/FECA57/FFFFFF?text=iPhone+14',
+      description: 'Brand new iPhone 14 Pro Max 256GB. Deep Purple color with all accessories.',
+      condition: 'New',
+      brand: 'Apple',
+      storage: '256GB',
+      posted: '1 day ago',
+      seller: 'Mobile World',
+      phone: '+94 77 111 2222'
+    }
+  ],
+  '6': [ // Fashion
+    {
+      id: 'fashion1',
+      title: 'Designer Wedding Dress',
+      price: 'Rs. 45,000',
+      location: 'Colombo 6',
+      image: 'https://via.placeholder.com/300x200/FF9FF3/FFFFFF?text=Wedding+Dress',
+      description: 'Beautiful designer wedding dress, size M. Worn only once, excellent condition.',
+      condition: 'Like New',
+      size: 'Medium',
+      brand: 'Designer Label',
+      posted: '3 days ago',
+      seller: 'Fashion Store',
+      phone: '+94 71 444 5555'
+    }
+  ],
+  '7': [ // Sports
+    {
+      id: 'sports1',
+      title: 'Professional Cricket Bat',
+      price: 'Rs. 8,500',
+      location: 'Kandy',
+      image: 'https://via.placeholder.com/300x200/54A0FF/FFFFFF?text=Cricket+Bat',
+      description: 'High quality English willow cricket bat. Perfect for serious players.',
+      condition: 'Used',
+      brand: 'MRF',
+      weight: '2.8 lbs',
+      posted: '5 days ago',
+      seller: 'Sports Zone',
+      phone: '+94 81 666 7777'
+    }
+  ],
+  '8': [ // Services
+    {
+      id: 'service1',
+      title: 'Home Cleaning Service',
+      price: 'Rs. 2,500/day',
+      location: 'Colombo',
+      image: 'https://via.placeholder.com/300x200/5F27CD/FFFFFF?text=Cleaning+Service',
+      description: 'Professional home cleaning service. Experienced staff, all cleaning supplies included.',
+      serviceType: 'Home Services',
+      availability: 'Mon-Sat',
+      posted: '2 days ago',
+      seller: 'Clean Pro Services',
+      phone: '+94 11 888 9999'
+    }
+  ],
+  '9': [ // Education
+    {
+      id: 'edu1',
+      title: 'Private English Tuition',
+      price: 'Rs. 1,500/hour',
+      location: 'Colombo 7',
+      image: 'https://via.placeholder.com/300x200/3742fa/FFFFFF?text=English+Tuition',
+      description: 'Experienced English teacher offering private tuition for O/L and A/L students.',
+      subject: 'English',
+      level: 'O/L & A/L',
+      experience: '10+ years',
+      posted: '1 day ago',
+      seller: 'Sarah Teacher',
+      phone: '+94 77 222 3333'
+    }
   ]
 };
 

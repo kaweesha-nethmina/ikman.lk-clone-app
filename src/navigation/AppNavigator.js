@@ -17,7 +17,56 @@ import ProfileScreen from '../screens/ProfileScreen';
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
 
-// Stack Navigator for Home flow
+// Stack Navigator for Search flow
+function SearchStackNavigator() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen 
+        name="SearchMain" 
+        component={SearchScreen} 
+        options={{ 
+          headerShown: true,
+          headerTitle: 'Search',
+          headerStyle: {
+            backgroundColor: '#149777',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }} 
+      />
+      <Stack.Screen 
+        name="Category" 
+        component={CategoryScreen}
+        options={({ route }) => ({
+          title: route.params?.categoryName || 'Category',
+          headerStyle: {
+            backgroundColor: '#149777',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        })}
+      />
+      <Stack.Screen 
+        name="ProductDetails" 
+        component={ProductDetailsScreen}
+        options={{
+          title: 'Product Details',
+          headerStyle: {
+            backgroundColor: '#149777',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
 function HomeStackNavigator() {
   return (
     <Stack.Navigator>
@@ -116,17 +165,10 @@ function AppNavigator() {
         />
         <Tab.Screen 
           name="Search" 
-          component={SearchScreen}
+          component={SearchStackNavigator}
           options={{
             tabBarLabel: 'Search',
-            headerShown: true,
-            headerStyle: {
-              backgroundColor: '#149777',
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
+            headerShown: false,
           }}
         />
         <Tab.Screen 

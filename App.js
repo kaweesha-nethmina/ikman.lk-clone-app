@@ -5,7 +5,7 @@ import AppNavigator from './src/navigation/AppNavigator';
 export default function App() {
   return (
     <>
-      <StatusBar style="light" backgroundColor="#2196F3" />
+      <StatusBar style="light" backgroundColor="#149777" />
       <AppNavigator />
     </>
   );

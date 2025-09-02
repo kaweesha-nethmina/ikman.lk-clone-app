@@ -32,6 +32,7 @@ const HomeScreen = ({ navigation }) => {
   };
 
   const handleCategoryPress = (category) => {
+    console.log('Category clicked:', category.name); // Debug message
     navigation.navigate('Category', { 
       categoryId: category.id,
       categoryName: category.name,
@@ -53,10 +54,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="#2196F3" barStyle="light-content" />
-      
-      {/* Blue Status Bar Area */}
-      <View style={styles.statusBarArea} />
+      <StatusBar backgroundColor="#149777" barStyle="light-content" translucent={false} />
       
       {/* Header */}
       <View style={styles.header}>
@@ -99,25 +97,19 @@ const HomeScreen = ({ navigation }) => {
 
         {/* Categories Section */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Browse Categories</Text>
           <FlatList
+            key="categories3Columns"
             data={categories}
             renderItem={renderCategoryItem}
             keyExtractor={(item) => item.id}
-            numColumns={4}
+            numColumns={3}
             scrollEnabled={false}
             contentContainerStyle={styles.categoriesContainer}
           />
         </View>
 
-        {/* Recent Ads Section */}
+        {/* Published Ads Section */}
         <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Recent Ads</Text>
-            <TouchableOpacity>
-              <Text style={styles.viewAllText}>View All</Text>
-            </TouchableOpacity>
-          </View>
           <FlatList
             key="recentAdsGrid"
             data={getRecentProducts()}
@@ -138,10 +130,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f5f5f5',
-  },
-  statusBarArea: {
-    height: 0, // This will be handled by StatusBar component
-    backgroundColor: '#2196F3',
   },
   header: {
     backgroundColor: '#149777',
@@ -225,27 +213,10 @@ const styles = StyleSheet.create({
   section: {
     marginBottom: 24,
   },
-  sectionHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    marginBottom: 16,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
-    paddingHorizontal: 16,
-    marginBottom: 16,
-  },
-  viewAllText: {
-    fontSize: 14,
-    color: '#149777',
-    fontWeight: '600',
-  },
   categoriesContainer: {
-    paddingHorizontal: 16,
+    paddingHorizontal: 8,
+    justifyContent: 'space-between',
+    alignItems: 'stretch',
   },
   gridContainer: {
     paddingHorizontal: 8,
