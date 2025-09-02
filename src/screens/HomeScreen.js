@@ -67,17 +67,20 @@ const HomeScreen = ({ navigation }) => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
+      <StatusBar backgroundColor="#149777" barStyle="light-content" translucent={false} />
       
       {/* Header */}
-      <View style={styles.header}>
+      <SafeAreaView style={styles.headerSafeArea}>
+        <View style={styles.header}>
         <Text style={styles.headerTitle}>ikman.lk</Text>
         <TouchableOpacity style={styles.searchButton} onPress={handleSearchButtonPress}>
           <Feather name="search" size={24} color="#fff" />
         </TouchableOpacity>
-      </View>
+        </View>
+      </SafeAreaView>
 
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollView}>
         {/* Location and Category Filters */}
         <View style={styles.filtersContainer}>
           <TouchableOpacity style={styles.filterItem}>
@@ -150,12 +153,19 @@ const HomeScreen = ({ navigation }) => {
           />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    backgroundColor: '#149777',
+  },
+  headerSafeArea: {
+    backgroundColor: '#149777',
+  },
+  scrollView: {
     flex: 1,
     backgroundColor: '#f5f5f5',
   },
@@ -167,13 +177,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 15,
     elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    // shadowColor: '#000',
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 3.84,
   },
   headerTitle: {
     fontSize: 24,
