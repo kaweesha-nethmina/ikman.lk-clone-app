@@ -17,6 +17,9 @@ import { categories } from '../data/categories';
 import { products } from '../data/products';
 
 const HomeScreen = ({ navigation }) => {
+  const [selectedLocation, setSelectedLocation] = React.useState('All Sri Lanka');
+  const [selectedCategory, setSelectedCategory] = React.useState('All Categories');
+
   // Get recent products from all categories
   const getRecentProducts = () => {
     const allProducts = [];
@@ -50,7 +53,10 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="#149777" barStyle="light-content" />
+      <StatusBar backgroundColor="#2196F3" barStyle="light-content" />
+      
+      {/* Blue Status Bar Area */}
+      <View style={styles.statusBarArea} />
       
       {/* Header */}
       <View style={styles.header}>
@@ -61,6 +67,24 @@ const HomeScreen = ({ navigation }) => {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Location and Category Filters */}
+        <View style={styles.filtersContainer}>
+          <TouchableOpacity style={styles.filterItem}>
+            <Feather name="map-pin" size={20} color="#149777" />
+            <Text style={styles.filterText} numberOfLines={1}>{selectedLocation}</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity style={styles.filterItem}>
+            <Feather name="grid" size={20} color="#149777" />
+            <Text style={styles.filterText} numberOfLines={1}>{selectedCategory}</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity style={styles.filterItem}>
+            <Feather name="sliders" size={20} color="#149777" />
+            <Text style={styles.filterText}>Filters</Text>
+          </TouchableOpacity>
+        </View>
+
         {/* Search Bar */}
         <View style={styles.searchContainer}>
           <View style={styles.searchBar}>
@@ -115,6 +139,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
   },
+  statusBarArea: {
+    height: 0, // This will be handled by StatusBar component
+    backgroundColor: '#2196F3',
+  },
   header: {
     backgroundColor: '#149777',
     flexDirection: 'row',
@@ -138,6 +166,33 @@ const styles = StyleSheet.create({
   },
   searchButton: {
     padding: 8,
+  },
+  filtersContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#f0f0f0',
+    gap: 8,
+  },
+  filterItem: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    backgroundColor: '#f8fffe',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#e8f5f3',
+  },
+  filterText: {
+    fontSize: 12,
+    color: '#149777',
+    fontWeight: '600',
+    marginLeft: 6,
+    flex: 1,
   },
   searchContainer: {
     paddingHorizontal: 16,
