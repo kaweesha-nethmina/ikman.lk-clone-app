@@ -8,6 +8,9 @@ import { Feather } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import CategoryScreen from '../screens/CategoryScreen';
 import ProductDetailsScreen from '../screens/ProductDetailsScreen';
+import SearchScreen from '../screens/SearchScreen';
+import PostAdScreen from '../screens/PostAdScreen';
+import ChatScreen from '../screens/ChatScreen';
 import MyAdsScreen from '../screens/MyAdsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
@@ -53,6 +56,20 @@ function HomeStackNavigator() {
           },
         }}
       />
+      <Stack.Screen 
+        name="PostAd" 
+        component={PostAdScreen}
+        options={{
+          title: 'Post Ad',
+          headerStyle: {
+            backgroundColor: '#149777',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 }
@@ -68,9 +85,13 @@ function AppNavigator() {
 
             if (route.name === 'Home') {
               iconName = 'home';
-            } else if (route.name === 'MyAds') {
-              iconName = 'bookmark';
-            } else if (route.name === 'Profile') {
+            } else if (route.name === 'Search') {
+              iconName = 'search';
+            } else if (route.name === 'PostAd') {
+              iconName = 'plus-circle';
+            } else if (route.name === 'Chat') {
+              iconName = 'message-circle';
+            } else if (route.name === 'Account') {
               iconName = 'user';
             }
 
@@ -94,10 +115,10 @@ function AppNavigator() {
           }}
         />
         <Tab.Screen 
-          name="MyAds" 
-          component={MyAdsScreen}
+          name="Search" 
+          component={SearchScreen}
           options={{
-            tabBarLabel: 'My Ads',
+            tabBarLabel: 'Search',
             headerShown: true,
             headerStyle: {
               backgroundColor: '#149777',
@@ -109,11 +130,44 @@ function AppNavigator() {
           }}
         />
         <Tab.Screen 
-          name="Profile" 
+          name="PostAd" 
+          component={PostAdScreen}
+          options={{
+            tabBarLabel: 'Post Ad',
+            headerShown: true,
+            headerTitle: 'Post Ad',
+            headerStyle: {
+              backgroundColor: '#149777',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Tab.Screen 
+          name="Chat" 
+          component={ChatScreen}
+          options={{
+            tabBarLabel: 'Chat',
+            headerShown: true,
+            headerTitle: 'Chat Support',
+            headerStyle: {
+              backgroundColor: '#149777',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Tab.Screen 
+          name="Account" 
           component={ProfileScreen}
           options={{
-            tabBarLabel: 'Profile',
+            tabBarLabel: 'Account',
             headerShown: true,
+            headerTitle: 'My Account',
             headerStyle: {
               backgroundColor: '#149777',
             },
