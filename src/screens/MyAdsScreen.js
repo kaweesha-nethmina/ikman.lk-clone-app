@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'transparent',
   },
   activeTabButton: {
-    borderBottomColor: '#FF6B35',
+    borderBottomColor: '#149777',
   },
   tabButtonText: {
     fontSize: 16,
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     color: '#666',
   },
   activeTabButtonText: {
-    color: '#FF6B35',
+    color: '#149777',
   },
   statsContainer: {
     flexDirection: 'row',
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
   postNewAdButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FF6B35',
+    backgroundColor: '#149777',
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 20,
@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   postAdButton: {
-    backgroundColor: '#FF6B35',
+    backgroundColor: '#149777',
     paddingHorizontal: 32,
     paddingVertical: 16,
     borderRadius: 25,

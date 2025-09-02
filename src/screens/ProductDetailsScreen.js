@@ -53,10 +53,10 @@ const ProductDetailsScreen = ({ route }) => {
         {/* Action Buttons */}
         <View style={styles.actionButtonsContainer}>
           <TouchableOpacity style={styles.actionButton} onPress={handleFavoritePress}>
-            <Feather name="heart" size={24} color="#FF6B35" />
+            <Feather name="heart" size={24} color="#149777" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.actionButton} onPress={handleSharePress}>
-            <Feather name="share-2" size={24} color="#FF6B35" />
+            <Feather name="share-2" size={24} color="#149777" />
           </TouchableOpacity>
         </View>
 
@@ -126,7 +126,7 @@ const ProductDetailsScreen = ({ route }) => {
           style={[styles.contactButton, styles.messageButton]} 
           onPress={handleMessagePress}
         >
-          <Feather name="message-circle" size={20} color="#FF6B35" />
+          <Feather name="message-circle" size={20} color="#149777" />
           <Text style={styles.messageButtonText}>Message</Text>
         </TouchableOpacity>
         
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
   productPrice: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#FF6B35',
+    color: '#149777',
     marginBottom: 16,
   },
   locationTimeContainer: {
@@ -261,7 +261,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: '#FF6B35',
+    backgroundColor: '#149777',
     justifyContent: 'center',
     alignItems: 'center',
     marginRight: 16,
@@ -303,16 +303,16 @@ const styles = StyleSheet.create({
   messageButton: {
     backgroundColor: '#fff',
     borderWidth: 2,
-    borderColor: '#FF6B35',
+    borderColor: '#149777',
   },
   messageButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#FF6B35',
+    color: '#149777',
     marginLeft: 8,
   },
   callButton: {
-    backgroundColor: '#FF6B35',
+    backgroundColor: '#149777',
   },
   callButtonText: {
     fontSize: 16,

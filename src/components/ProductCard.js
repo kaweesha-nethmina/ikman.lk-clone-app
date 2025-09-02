@@ -2,19 +2,22 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const ProductCard = ({ product, onPress }) => {
+const ProductCard = ({ product, onPress, isGrid = false }) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={() => onPress(product)}>
-      <Image source={{ uri: product.image }} style={styles.image} />
+    <TouchableOpacity 
+      style={[styles.container, isGrid && styles.gridContainer]} 
+      onPress={() => onPress(product)}
+    >
+      <Image source={{ uri: product.image }} style={[styles.image, isGrid && styles.gridImage]} />
       <View style={styles.contentContainer}>
         <Text style={styles.title} numberOfLines={2}>{product.title}</Text>
         <Text style={styles.price}>{product.price}</Text>
         <View style={styles.locationContainer}>
-          <Feather name="map-pin" size={14} color="#666" />
-          <Text style={styles.location}>{product.location}</Text>
+          <Feather name="map-pin" size={12} color="#666" />
+          <Text style={styles.location} numberOfLines={1}>{product.location}</Text>
         </View>
         <View style={styles.timeContainer}>
-          <Feather name="clock" size={14} color="#666" />
+          <Feather name="clock" size={12} color="#666" />
           <Text style={styles.timePosted}>{product.posted}</Text>
         </View>
       </View>
@@ -38,25 +41,34 @@ const styles = StyleSheet.create({
     elevation: 5,
     overflow: 'hidden',
   },
+  gridContainer: {
+    flex: 1,
+    marginHorizontal: 8,
+    marginVertical: 8,
+  },
   image: {
     width: '100%',
     height: 200,
     backgroundColor: '#f0f0f0',
   },
+  gridImage: {
+    height: 140,
+  },
   contentContainer: {
-    padding: 16,
+    padding: 12,
   },
   title: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '600',
     color: '#333',
-    marginBottom: 8,
+    marginBottom: 6,
+    lineHeight: 18,
   },
   price: {
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: 'bold',
-    color: '#FF6B35',
-    marginBottom: 8,
+    color: '#149777',
+    marginBottom: 6,
   },
   locationContainer: {
     flexDirection: 'row',
@@ -64,16 +76,17 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   location: {
-    fontSize: 14,
+    fontSize: 12,
     color: '#666',
     marginLeft: 4,
+    flex: 1,
   },
   timeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   timePosted: {
-    fontSize: 12,
+    fontSize: 11,
     color: '#666',
     marginLeft: 4,
   },

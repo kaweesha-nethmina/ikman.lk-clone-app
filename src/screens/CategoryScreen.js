@@ -20,7 +20,7 @@ const CategoryScreen = ({ route, navigation }) => {
   };
 
   const renderProductItem = ({ item }) => (
-    <ProductCard product={item} onPress={handleProductPress} />
+    <ProductCard product={item} onPress={handleProductPress} isGrid={true} />
   );
 
   const ListEmptyComponent = () => (
@@ -39,7 +39,7 @@ const CategoryScreen = ({ route, navigation }) => {
         {categoryProducts.length} ads found in {categoryName}
       </Text>
       <TouchableOpacity style={styles.filterButton}>
-        <Feather name="sliders" size={20} color="#FF6B35" />
+        <Feather name="sliders" size={20} color="#149777" />
         <Text style={styles.filterText}>Filter</Text>
       </TouchableOpacity>
     </View>
@@ -48,9 +48,11 @@ const CategoryScreen = ({ route, navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
+        key="categoryGrid"
         data={categoryProducts}
         renderItem={renderProductItem}
         keyExtractor={(item) => item.id}
+        numColumns={2}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContainer}
         ListHeaderComponent={ListHeaderComponent}
@@ -67,6 +69,7 @@ const styles = StyleSheet.create({
   },
   listContainer: {
     paddingBottom: 20,
+    paddingHorizontal: 8,
   },
   headerContainer: {
     flexDirection: 'row',
@@ -88,12 +91,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderWidth: 1,
-    borderColor: '#FF6B35',
+    borderColor: '#149777',
     borderRadius: 20,
   },
   filterText: {
     fontSize: 14,
-    color: '#FF6B35',
+    color: '#149777',
     marginLeft: 6,
     fontWeight: '600',
   },

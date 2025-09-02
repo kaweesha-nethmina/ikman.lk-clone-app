@@ -2,14 +2,14 @@ export const categories = [
   {
     id: '1',
     name: 'Cars',
-    icon: 'car',
+    icon: 'truck',
     color: '#FF6B6B',
     image: 'https://via.placeholder.com/100x100/FF6B6B/FFFFFF?text=Cars',
   },
   {
     id: '2',
     name: 'Electronics',
-    icon: 'laptop',
+    icon: 'monitor',
     color: '#4ECDC4',
     image: 'https://via.placeholder.com/100x100/4ECDC4/FFFFFF?text=Electronics',
   },
@@ -51,7 +51,7 @@ export const categories = [
   {
     id: '8',
     name: 'Services',
-    icon: 'settings',
+    icon: 'tool',
     color: '#5F27CD',
     image: 'https://via.placeholder.com/100x100/5F27CD/FFFFFF?text=Services',
   },

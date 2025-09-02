@@ -8,7 +8,7 @@ const MyAdCard = ({ ad, onPress }) => {
       case 'Active':
         return '#4CAF50';
       case 'Sold':
-        return '#FF6B35';
+        return '#149777';
       case 'Expired':
         return '#F44336';
       default:
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#FF6B35',
+    color: '#149777',
     marginBottom: 12,
   },
   statsRow: {

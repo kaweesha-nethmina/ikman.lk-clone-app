@@ -31,7 +31,7 @@ function HomeStackNavigator() {
         options={({ route }) => ({
           title: route.params?.categoryName || 'Category',
           headerStyle: {
-            backgroundColor: '#FF6B35',
+            backgroundColor: '#149777',
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
@@ -45,7 +45,7 @@ function HomeStackNavigator() {
         options={{
           title: 'Product Details',
           headerStyle: {
-            backgroundColor: '#FF6B35',
+            backgroundColor: '#149777',
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
@@ -76,7 +76,7 @@ function AppNavigator() {
 
             return <Feather name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: '#FF6B35',
+          tabBarActiveTintColor: '#149777',
           tabBarInactiveTintColor: 'gray',
           tabBarStyle: {
             paddingBottom: 5,
@@ -100,7 +100,7 @@ function AppNavigator() {
             tabBarLabel: 'My Ads',
             headerShown: true,
             headerStyle: {
-              backgroundColor: '#FF6B35',
+              backgroundColor: '#149777',
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
@@ -115,7 +115,7 @@ function AppNavigator() {
             tabBarLabel: 'Profile',
             headerShown: true,
             headerStyle: {
-              backgroundColor: '#FF6B35',
+              backgroundColor: '#149777',
             },
             headerTintColor: '#fff',
             headerTitleStyle: {

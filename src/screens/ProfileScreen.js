@@ -34,7 +34,7 @@ const ProfileScreen = () => {
     <TouchableOpacity style={styles.menuItem} onPress={onPress}>
       <View style={styles.menuItemLeft}>
         <View style={styles.menuIconContainer}>
-          <Feather name={icon} size={20} color="#FF6B35" />
+          <Feather name={icon} size={20} color="#149777" />
         </View>
         <Text style={styles.menuItemText}>{title}</Text>
       </View>
@@ -103,7 +103,7 @@ const ProfileScreen = () => {
               <Switch
                 value={notificationsEnabled}
                 onValueChange={setNotificationsEnabled}
-                trackColor={{ false: '#ccc', true: '#FF6B35' }}
+                trackColor={{ false: '#ccc', true: '#149777' }}
                 thumbColor="#fff"
               />
             }
@@ -117,7 +117,7 @@ const ProfileScreen = () => {
               <Switch
                 value={locationEnabled}
                 onValueChange={setLocationEnabled}
-                trackColor={{ false: '#ccc', true: '#FF6B35' }}
+                trackColor={{ false: '#ccc', true: '#149777' }}
                 thumbColor="#fff"
               />
             }
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 40,
-    backgroundColor: '#FF6B35',
+    backgroundColor: '#149777',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 16,
@@ -228,12 +228,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderWidth: 1,
-    borderColor: '#FF6B35',
+    borderColor: '#149777',
     borderRadius: 20,
   },
   editProfileText: {
     fontSize: 14,
-    color: '#FF6B35',
+    color: '#149777',
     fontWeight: '600',
   },
   sectionHeader: {

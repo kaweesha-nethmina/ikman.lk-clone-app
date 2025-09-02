@@ -45,12 +45,12 @@ const HomeScreen = ({ navigation }) => {
   );
 
   const renderProductItem = ({ item }) => (
-    <ProductCard product={item} onPress={handleProductPress} />
+    <ProductCard product={item} onPress={handleProductPress} isGrid={true} />
   );
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="#FF6B35" barStyle="light-content" />
+      <StatusBar backgroundColor="#149777" barStyle="light-content" />
       
       {/* Header */}
       <View style={styles.header}>
@@ -95,11 +95,14 @@ const HomeScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           <FlatList
+            key="recentAdsGrid"
             data={getRecentProducts()}
             renderItem={renderProductItem}
             keyExtractor={(item) => item.id}
+            numColumns={2}
             scrollEnabled={false}
             showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.gridContainer}
           />
         </View>
       </ScrollView>
@@ -113,7 +116,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f5f5f5',
   },
   header: {
-    backgroundColor: '#FF6B35',
+    backgroundColor: '#149777',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -183,11 +186,14 @@ const styles = StyleSheet.create({
   },
   viewAllText: {
     fontSize: 14,
-    color: '#FF6B35',
+    color: '#149777',
     fontWeight: '600',
   },
   categoriesContainer: {
     paddingHorizontal: 16,
+  },
+  gridContainer: {
+    paddingHorizontal: 8,
   },
 });
 
