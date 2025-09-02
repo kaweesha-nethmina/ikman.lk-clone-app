@@ -19,6 +19,8 @@ import { products } from '../data/products';
 const HomeScreen = ({ navigation }) => {
   const [selectedLocation, setSelectedLocation] = React.useState('All Sri Lanka');
   const [selectedCategory, setSelectedCategory] = React.useState('All Categories');
+  const [showSearchBar, setShowSearchBar] = React.useState(false);
+  const [searchText, setSearchText] = React.useState('');
 
   // Get recent products from all categories
   const getRecentProducts = () => {
@@ -44,6 +46,18 @@ const HomeScreen = ({ navigation }) => {
     navigation.navigate('ProductDetails', { product });
   };
 
+  const handleSearchButtonPress = () => {
+    setShowSearchBar(!showSearchBar);
+  };
+
+  const handleSearch = () => {
+    if (searchText.trim()) {
+      console.log('Searching for:', searchText);
+      // Navigate to search screen with search query
+      navigation.navigate('Search', { searchQuery: searchText });
+    }
+  };
+
   const renderCategoryItem = ({ item }) => (
     <CategoryCard category={item} onPress={handleCategoryPress} />
   );
@@ -54,12 +68,11 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar backgroundColor="#149777" barStyle="light-content" translucent={false} />
       
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>ikman.lk</Text>
-        <TouchableOpacity style={styles.searchButton}>
+        <TouchableOpacity style={styles.searchButton} onPress={handleSearchButtonPress}>
           <Feather name="search" size={24} color="#fff" />
         </TouchableOpacity>
       </View>
@@ -83,19 +96,34 @@ const HomeScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
-        {/* Search Bar */}
-        <View style={styles.searchContainer}>
-          <View style={styles.searchBar}>
-            <Feather name="search" size={20} color="#666" style={styles.searchIcon} />
-            <TextInput
-              placeholder="What are you looking for?"
-              style={styles.searchInput}
-              placeholderTextColor="#666"
-            />
+        {/* Search Bar - Conditional Rendering */}
+        {showSearchBar && (
+          <View style={styles.searchContainer}>
+            <View style={styles.searchBar}>
+              <Feather name="search" size={20} color="#666" style={styles.searchIcon} />
+              <TextInput
+                placeholder="What are you looking for?"
+                style={styles.searchInput}
+                placeholderTextColor="#666"
+                value={searchText}
+                onChangeText={setSearchText}
+                onSubmitEditing={handleSearch}
+                autoFocus={true}
+              />
+              <TouchableOpacity 
+                style={styles.closeButton} 
+                onPress={() => {
+                  setShowSearchBar(false);
+                  setSearchText('');
+                }}
+              >
+                <Feather name="x" size={20} color="#666" />
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        )}
 
-        {/* Categories Section */}
+        {/* Categories Section
         <View style={styles.section}>
           <FlatList
             key="categories3Columns"
@@ -106,7 +134,7 @@ const HomeScreen = ({ navigation }) => {
             scrollEnabled={false}
             contentContainerStyle={styles.categoriesContainer}
           />
-        </View>
+        </View> */}
 
         {/* Published Ads Section */}
         <View style={styles.section}>
@@ -209,6 +237,10 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     color: '#333',
+  },
+  closeButton: {
+    marginLeft: 10,
+    padding: 4,
   },
   section: {
     marginBottom: 24,

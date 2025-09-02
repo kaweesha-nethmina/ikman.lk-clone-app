@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -13,9 +13,16 @@ import { Feather } from '@expo/vector-icons';
 import CategoryCard from '../components/CategoryCard';
 import { categories } from '../data/categories';
 
-const SearchScreen = ({ navigation }) => {
+const SearchScreen = ({ navigation, route }) => {
   const [searchText, setSearchText] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('All Sri Lanka');
+
+  // Handle search query from navigation params
+  useEffect(() => {
+    if (route.params?.searchQuery) {
+      setSearchText(route.params.searchQuery);
+    }
+  }, [route.params?.searchQuery]);
 
   const locations = [
     'All Sri Lanka',
