@@ -1,0 +1,58 @@
+export const categories = [
+  {
+    id: '1',
+    name: 'Cars',
+    icon: 'car',
+    color: '#FF6B6B',
+    image: 'https://via.placeholder.com/100x100/FF6B6B/FFFFFF?text=Cars',
+  },
+  {
+    id: '2',
+    name: 'Electronics',
+    icon: 'laptop',
+    color: '#4ECDC4',
+    image: 'https://via.placeholder.com/100x100/4ECDC4/FFFFFF?text=Electronics',
+  },
+  {
+    id: '3',
+    name: 'Jobs',
+    icon: 'briefcase',
+    color: '#45B7D1',
+    image: 'https://via.placeholder.com/100x100/45B7D1/FFFFFF?text=Jobs',
+  },
+  {
+    id: '4',
+    name: 'Property',
+    icon: 'home',
+    color: '#96CEB4',
+    image: 'https://via.placeholder.com/100x100/96CEB4/FFFFFF?text=Property',
+  },
+  {
+    id: '5',
+    name: 'Mobile Phones',
+    icon: 'smartphone',
+    color: '#FECA57',
+    image: 'https://via.placeholder.com/100x100/FECA57/FFFFFF?text=Phones',
+  },
+  {
+    id: '6',
+    name: 'Fashion',
+    icon: 'shopping-bag',
+    color: '#FF9FF3',
+    image: 'https://via.placeholder.com/100x100/FF9FF3/FFFFFF?text=Fashion',
+  },
+  {
+    id: '7',
+    name: 'Sports',
+    icon: 'activity',
+    color: '#54A0FF',
+    image: 'https://via.placeholder.com/100x100/54A0FF/FFFFFF?text=Sports',
+  },
+  {
+    id: '8',
+    name: 'Services',
+    icon: 'settings',
+    color: '#5F27CD',
+    image: 'https://via.placeholder.com/100x100/5F27CD/FFFFFF?text=Services',
+  },
+];
