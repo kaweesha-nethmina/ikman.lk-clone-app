@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
@@ -39,14 +38,14 @@ const ProfileScreen: React.FC = () => {
   }
 
   const MenuItem: React.FC<MenuItemProps> = ({ icon, title, onPress, rightComponent, showArrow = true }) => (
-    <TouchableOpacity style={styles.menuItem} onPress={onPress}>
-      <View style={styles.menuItemLeft}>
-        <View style={styles.menuIconContainer}>
+    <TouchableOpacity className="flex-row items-center justify-between px-4 py-4 border-b border-gray-200" onPress={onPress}>
+      <View className="flex-row items-center flex-1">
+        <View className="w-10 h-10 rounded-full bg-[#FFF5F0] justify-center items-center mr-4">
           <Feather name={icon as any} size={20} color="#149777" />
         </View>
-        <Text style={styles.menuItemText}>{title}</Text>
+        <Text className="text-base text-gray-700 font-medium">{title}</Text>
       </View>
-      <View style={styles.menuItemRight}>
+      <View className="flex-row items-center">
         {rightComponent}
         {showArrow && <Feather name="chevron-right" size={20} color="#ccc" />}
       </View>
@@ -58,30 +57,30 @@ const ProfileScreen: React.FC = () => {
   }
 
   const SectionHeader: React.FC<SectionHeaderProps> = ({ title }) => (
-    <Text style={styles.sectionHeader}>{title}</Text>
+    <Text className="text-lg font-bold text-gray-700 px-4 py-3 bg-gray-100">{title}</Text>
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView className="flex-1 bg-gray-100">
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Profile Header */}
-        <View style={styles.profileHeader}>
-          <View style={styles.avatarContainer}>
+        <View className="bg-white items-center py-8 mb-6">
+          <View className="w-20 h-20 rounded-full bg-[#149777] justify-center items-center mb-4">
             <Feather name="user" size={40} color="#fff" />
           </View>
-          <Text style={styles.profileName}>Kaweesha Nethmina</Text>
-          <Text style={styles.profileEmail}>Kaweesha.nj@gmail.com</Text>
+          <Text className="text-2xl font-bold text-gray-700 mb-1">Kaweesha Nethmina</Text>
+          <Text className="text-base text-gray-500 mb-4">Kaweesha.nj@gmail.com</Text>
           <TouchableOpacity 
-            style={styles.editProfileButton}
+            className="px-5 py-2.5 border border-[#149777] rounded-full"
             onPress={() => handleMenuPress('Edit Profile')}
           >
-            <Text style={styles.editProfileText}>Edit Profile</Text>
+            <Text className="text-sm text-[#149777] font-semibold">Edit Profile</Text>
           </TouchableOpacity>
         </View>
 
         {/* Account Section */}
         <SectionHeader title="Account" />
-        <View style={styles.menuSection}>
+        <View className="bg-white mb-6">
           <MenuItem
             icon="bookmark"
             title="Saved Ads"
@@ -106,7 +105,7 @@ const ProfileScreen: React.FC = () => {
 
         {/* Settings Section */}
         <SectionHeader title="Settings" />
-        <View style={styles.menuSection}>
+        <View className="bg-white mb-6">
           <MenuItem
             icon="bell"
             title="Notifications"
@@ -149,7 +148,7 @@ const ProfileScreen: React.FC = () => {
 
         {/* Support Section */}
         <SectionHeader title="Support" />
-        <View style={styles.menuSection}>
+        <View className="bg-white mb-6">
           <MenuItem
             icon="help-circle"
             title="Help Center"
@@ -174,7 +173,7 @@ const ProfileScreen: React.FC = () => {
 
         {/* Legal Section */}
         <SectionHeader title="Legal" />
-        <View style={styles.menuSection}>
+        <View className="bg-white mb-6">
           <MenuItem
             icon="file-text"
             title="Terms of Service"
@@ -193,129 +192,16 @@ const ProfileScreen: React.FC = () => {
         </View>
 
         {/* Logout Button */}
-        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+        <TouchableOpacity className="flex-row items-center justify-center bg-white mx-4 my-6 py-4 rounded-lg border border-red-500" onPress={handleLogout}>
           <Feather name="log-out" size={20} color="#F44336" />
-          <Text style={styles.logoutText}>Logout</Text>
+          <Text className="text-base text-red-500 font-semibold ml-2">Logout</Text>
         </TouchableOpacity>
 
         {/* App Version */}
-        <Text style={styles.versionText}>Version 1.0.0</Text>
+        <Text className="text-sm text-gray-500 text-center py-4">Version 1.0.0</Text>
       </ScrollView>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  profileHeader: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    paddingVertical: 32,
-    marginBottom: 24,
-  },
-  avatarContainer: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: '#149777',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  profileName: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 4,
-  },
-  profileEmail: {
-    fontSize: 16,
-    color: '#666',
-    marginBottom: 16,
-  },
-  editProfileButton: {
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderWidth: 1,
-    borderColor: '#149777',
-    borderRadius: 20,
-  },
-  editProfileText: {
-    fontSize: 14,
-    color: '#149777',
-    fontWeight: '600',
-  },
-  sectionHeader: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#f5f5f5',
-  },
-  menuSection: {
-    backgroundColor: '#fff',
-    marginBottom: 24,
-  },
-  menuItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  menuItemLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
-  },
-  menuIconContainer: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#FFF5F0',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 16,
-  },
-  menuItemText: {
-    fontSize: 16,
-    color: '#333',
-    fontWeight: '500',
-  },
-  menuItemRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  logoutButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-    marginHorizontal: 16,
-    marginVertical: 24,
-    paddingVertical: 16,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#F44336',
-  },
-  logoutText: {
-    fontSize: 16,
-    color: '#F44336',
-    fontWeight: '600',
-    marginLeft: 8,
-  },
-  versionText: {
-    fontSize: 14,
-    color: '#666',
-    textAlign: 'center',
-    paddingVertical: 16,
-  },
-});
 
 export default ProfileScreen;

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   SafeAreaView,
   ScrollView,
   TextInput,
@@ -63,15 +62,15 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation, route }) => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView className="flex-1 bg-gray-100">
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Search Bar */}
-        <View style={styles.searchContainer}>
-          <View style={styles.searchBar}>
-            <Feather name="search" size={20} color="#666" style={styles.searchIcon} />
+        <View className="px-4 py-4 bg-white">
+          <View className="flex-row items-center bg-gray-100 rounded-full px-4 py-3">
+            <Feather name="search" size={20} color="#666" />
             <TextInput
               placeholder="What are you looking for?"
-              style={styles.searchInput}
+              className="flex-1 text-base text-gray-700 ml-2.5"
               placeholderTextColor="#666"
               value={searchText}
               onChangeText={setSearchText}
@@ -81,17 +80,17 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation, route }) => {
         </View>
 
         {/* Location Filter */}
-        <View style={styles.filterContainer}>
-          <TouchableOpacity style={styles.locationFilter}>
+        <View className="px-4 py-3 bg-white border-b border-gray-200">
+          <TouchableOpacity className="flex-row items-center py-2">
             <Feather name="map-pin" size={18} color="#149777" />
-            <Text style={styles.locationText}>{selectedLocation}</Text>
+            <Text className="text-base text-gray-700 ml-2 mr-2 flex-1">{selectedLocation}</Text>
             <Feather name="chevron-down" size={18} color="#666" />
           </TouchableOpacity>
         </View>
 
         {/* Categories Section */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Browse Categories</Text>
+        <View className="mb-6 bg-white py-4">
+          <Text className="text-xl font-bold text-gray-700 px-4 mb-4">Browse Categories</Text>
           <FlatList
             key="searchCategories3Columns"
             data={categories}
@@ -99,17 +98,17 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation, route }) => {
             keyExtractor={(item: Category) => item.id}
             numColumns={3}
             scrollEnabled={false}
-            contentContainerStyle={styles.categoriesContainer}
+            contentContainerStyle={{ paddingHorizontal: 8 }}
           />
         </View>
 
         {/* Popular Searches */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Popular Searches</Text>
-          <View style={styles.popularSearches}>
+        <View className="mb-6 bg-white py-4">
+          <Text className="text-xl font-bold text-gray-700 px-4 mb-4">Popular Searches</Text>
+          <View className="flex-row flex-wrap px-4">
             {['iPhone', 'Car for sale', 'House rent', 'Job vacancy', 'Laptop'].map((search, index) => (
-              <TouchableOpacity key={index} style={styles.popularSearchTag}>
-                <Text style={styles.popularSearchText}>{search}</Text>
+              <TouchableOpacity key={index} className="bg-gray-200 px-3 py-2 rounded-full mr-2 mb-2">
+                <Text className="text-sm text-gray-500">{search}</Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -118,86 +117,5 @@ const SearchScreen: React.FC<SearchScreenProps> = ({ navigation, route }) => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  searchContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    backgroundColor: '#fff',
-  },
-  searchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#f5f5f5',
-    borderRadius: 25,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-  },
-  searchIcon: {
-    marginRight: 10,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
-    color: '#333',
-  },
-  filterContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  locationFilter: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 8,
-  },
-  locationText: {
-    fontSize: 16,
-    color: '#333',
-    marginLeft: 8,
-    marginRight: 8,
-    flex: 1,
-  },
-  section: {
-    marginBottom: 24,
-    backgroundColor: '#fff',
-    paddingVertical: 16,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
-    paddingHorizontal: 16,
-    marginBottom: 16,
-  },
-  categoriesContainer: {
-    paddingHorizontal: 8,
-    justifyContent: 'space-between',
-    alignItems: 'stretch',
-  },
-  popularSearches: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    paddingHorizontal: 16,
-  },
-  popularSearchTag: {
-    backgroundColor: '#f0f0f0',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderRadius: 20,
-    marginRight: 8,
-    marginBottom: 8,
-  },
-  popularSearchText: {
-    fontSize: 14,
-    color: '#666',
-  },
-});
 
 export default SearchScreen;

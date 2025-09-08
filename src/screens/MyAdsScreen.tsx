@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   SafeAreaView,
   FlatList,
   TouchableOpacity,
@@ -11,6 +10,7 @@ import {
 import MyAdCard from '../components/MyAdCard';
 import { myAds } from '../data/products';
 import { Feather } from '@expo/vector-icons';
+import { cn } from '../utils/cn';
 
 // Import types
 import { MyAd } from '../types';
@@ -53,31 +53,37 @@ const MyAdsScreen: React.FC<MyAdsScreenProps> = ({ navigation }) => {
 
   const TabButton: React.FC<TabButtonProps> = ({ title, isActive, onPress }) => (
     <TouchableOpacity
-      style={[styles.tabButton, isActive && styles.activeTabButton]}
+      className={cn(
+        "flex-1 py-3 items-center justify-center border-b-3",
+        isActive ? "border-[#149777]" : "border-transparent"
+      )}
       onPress={onPress}
     >
-      <Text style={[styles.tabButtonText, isActive && styles.activeTabButtonText]}>
+      <Text className={cn(
+        "text-base font-semibold",
+        isActive ? "text-[#149777]" : "text-gray-500"
+      )}>
         {title}
       </Text>
     </TouchableOpacity>
   );
 
   const ListEmptyComponent = () => (
-    <View style={styles.emptyContainer}>
+    <View className="flex-1 justify-center items-center py-25 px-10">
       <Feather name="plus-circle" size={64} color="#ccc" />
-      <Text style={styles.emptyTitle}>No ads yet</Text>
-      <Text style={styles.emptyDescription}>
+      <Text className="text-2xl font-bold text-gray-700 mt-4 mb-2">No ads yet</Text>
+      <Text className="text-base text-gray-500 text-center mb-6">
         You haven't posted any ads yet. Start selling your items!
       </Text>
-      <TouchableOpacity style={styles.postAdButton} onPress={handlePostAdPress}>
-        <Text style={styles.postAdButtonText}>Post Your First Ad</Text>
+      <TouchableOpacity className="bg-[#149777] px-8 py-4 rounded-full" onPress={handlePostAdPress}>
+        <Text className="text-base text-white font-semibold">Post Your First Ad</Text>
       </TouchableOpacity>
     </View>
   );
 
   const ListHeaderComponent = () => (
-    <View style={styles.headerContainer}>
-      <View style={styles.tabContainer}>
+    <View className="bg-white mb-2">
+      <View className="flex-row px-4 pt-4">
         <TabButton
           title="All"
           isActive={activeTab === 'all'}
@@ -96,13 +102,13 @@ const MyAdsScreen: React.FC<MyAdsScreenProps> = ({ navigation }) => {
       </View>
       
       {getFilteredAds().length > 0 && (
-        <View style={styles.statsContainer}>
-          <Text style={styles.statsText}>
+        <View className="flex-row justify-between items-center px-4 py-4">
+          <Text className="text-base text-gray-700 font-semibold">
             {getFilteredAds().length} ads found
           </Text>
-          <TouchableOpacity style={styles.postNewAdButton} onPress={handlePostAdPress}>
+          <TouchableOpacity className="flex-row items-center bg-[#149777] px-4 py-2.5 rounded-full" onPress={handlePostAdPress}>
             <Feather name="plus" size={20} color="#fff" />
-            <Text style={styles.postNewAdText}>Post Ad</Text>
+            <Text className="text-sm text-white font-semibold ml-1.5">Post Ad</Text>
           </TouchableOpacity>
         </View>
       )}
@@ -110,112 +116,18 @@ const MyAdsScreen: React.FC<MyAdsScreenProps> = ({ navigation }) => {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView className="flex-1 bg-gray-100">
       <FlatList
         data={getFilteredAds()}
         renderItem={renderAdItem}
         keyExtractor={(item: MyAd) => item.id}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.listContainer}
+        contentContainerStyle={{ paddingBottom: 20 }}
         ListHeaderComponent={ListHeaderComponent}
         ListEmptyComponent={ListEmptyComponent}
       />
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  listContainer: {
-    paddingBottom: 20,
-  },
-  headerContainer: {
-    backgroundColor: '#fff',
-    marginBottom: 8,
-  },
-  tabContainer: {
-    flexDirection: 'row',
-    paddingHorizontal: 16,
-    paddingTop: 16,
-  },
-  tabButton: {
-    flex: 1,
-    paddingVertical: 12,
-    alignItems: 'center',
-    borderBottomWidth: 2,
-    borderBottomColor: 'transparent',
-  },
-  activeTabButton: {
-    borderBottomColor: '#149777',
-  },
-  tabButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#666',
-  },
-  activeTabButtonText: {
-    color: '#149777',
-  },
-  statsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-  },
-  statsText: {
-    fontSize: 16,
-    color: '#333',
-    fontWeight: '600',
-  },
-  postNewAdButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#149777',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 20,
-  },
-  postNewAdText: {
-    fontSize: 14,
-    color: '#fff',
-    fontWeight: '600',
-    marginLeft: 6,
-  },
-  emptyContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 100,
-    paddingHorizontal: 40,
-  },
-  emptyTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    marginTop: 16,
-    marginBottom: 8,
-  },
-  emptyDescription: {
-    fontSize: 16,
-    color: '#666',
-    textAlign: 'center',
-    marginBottom: 24,
-  },
-  postAdButton: {
-    backgroundColor: '#149777',
-    paddingHorizontal: 32,
-    paddingVertical: 16,
-    borderRadius: 25,
-  },
-  postAdButtonText: {
-    fontSize: 16,
-    color: '#fff',
-    fontWeight: '600',
-  },
-});
 
 export default MyAdsScreen;

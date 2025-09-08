@@ -8,7 +8,7 @@ export const products: { [key: string]: Product[] } = {
       title: 'Toyota Prius 2015',
       price: 'Rs. 4,500,000',
       location: 'Colombo 3',
-      image: 'https://images.unsplash.com/photo-1600003014755-ba31aa59c4b6?w=300&h=200&fit=crop&crop=center',
+      image: 'https://images.unsplash.com/photo-1542362567-b07e54358753?w=300&h=200&fit=crop&crop=center',
       description: 'Well maintained Toyota Prius 2015 model. Excellent fuel efficiency. Single owner vehicle with full service records.',
       condition: 'Used',
       year: '2015',

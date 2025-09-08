@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
@@ -95,69 +94,60 @@ const ChatScreen: React.FC<ChatScreenProps> = ({ navigation }) => {
   };
 
   const renderMessage = (message: Message) => (
-    <View key={message.id} style={[
-      styles.messageContainer,
-      message.isBot ? styles.botMessage : styles.userMessage
-    ]}>
-      <Text style={[
-        styles.messageText,
-        message.isBot ? styles.botMessageText : styles.userMessageText
-      ]}>
+    <View key={message.id} className={message.isBot ? "self-start mb-1 max-w-[80%]" : "self-end mb-1 max-w-[80%]"}>
+      <Text className={message.isBot ? "text-base leading-5 px-4 py-3 rounded-[18px] bg-white text-gray-700" : "text-base leading-5 px-4 py-3 rounded-[18px] bg-[#149777] text-white"}>
         {message.text}
       </Text>
-      <Text style={[
-        styles.timestamp,
-        message.isBot ? styles.botTimestamp : styles.userTimestamp
-      ]}>
+      <Text className={message.isBot ? "text-xs mt-1 px-4 text-gray-500" : "text-xs mt-1 px-4 text-gray-500 text-right"}>
         {message.timestamp}
       </Text>
     </View>
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView className="flex-1 bg-gray-100">
       {/* Header */}
-      <View style={styles.header}>
-        <View style={styles.botAvatar}>
+      <View className="flex-row items-center px-4 py-4 bg-white border-b border-gray-200">
+        <View className="w-10 h-10 rounded-full bg-[#149777] justify-center items-center mr-3">
           <Feather name="message-circle" size={24} color="#fff" />
         </View>
-        <View style={styles.headerInfo}>
-          <Text style={styles.headerTitle}>Ikman.lk Assistant</Text>
-          <Text style={styles.headerSubtitle}>Online • Always ready to help</Text>
+        <View className="flex-1">
+          <Text className="text-lg font-bold text-gray-700">Ikman.lk Assistant</Text>
+          <Text className="text-sm text-[#149777] mt-0.5">Online • Always ready to help</Text>
         </View>
       </View>
 
       {/* Quick Action Buttons */}
-      <View style={styles.quickActionsContainer}>
+      <View className="flex-row px-4 py-4 bg-white border-b border-gray-200 gap-3">
         <TouchableOpacity 
-          style={styles.quickActionButton}
+          className="flex-1 flex-row items-center justify-center py-3 px-4 border border-[#149777] rounded-full bg-[#f8fffe]"
           onPress={() => handleQuickAction('browse')}
         >
           <Feather name="search" size={20} color="#149777" />
-          <Text style={styles.quickActionText}>Browse Ads</Text>
+          <Text className="text-sm font-semibold text-[#149777] ml-2">Browse Ads</Text>
         </TouchableOpacity>
         
         <TouchableOpacity 
-          style={styles.quickActionButton}
+          className="flex-1 flex-row items-center justify-center py-3 px-4 border border-[#149777] rounded-full bg-[#f8fffe]"
           onPress={() => handleQuickAction('post')}
         >
           <Feather name="plus-circle" size={20} color="#149777" />
-          <Text style={styles.quickActionText}>Post an Ad</Text>
+          <Text className="text-sm font-semibold text-[#149777] ml-2">Post an Ad</Text>
         </TouchableOpacity>
       </View>
 
       {/* Messages */}
       <ScrollView 
-        style={styles.messagesContainer}
+        className="flex-1 px-4 py-2"
         showsVerticalScrollIndicator={false}
       >
         {messages.map(renderMessage)}
       </ScrollView>
 
       {/* Input Container */}
-      <View style={styles.inputContainer}>
+      <View className="flex-row items-end px-4 py-3 bg-white border-t border-gray-200">
         <TextInput
-          style={styles.textInput}
+          className="flex-1 border border-gray-300 rounded-full px-4 py-3 text-base max-h-[100px] mr-3"
           placeholder="Type your message..."
           value={inputText}
           onChangeText={setInputText}
@@ -165,7 +155,7 @@ const ChatScreen: React.FC<ChatScreenProps> = ({ navigation }) => {
           multiline
         />
         <TouchableOpacity 
-          style={[styles.sendButton, inputText.trim() && styles.activeSendButton]}
+          className={inputText.trim() ? "w-10 h-10 rounded-full bg-[#149777] justify-center items-center" : "w-10 h-10 rounded-full bg-gray-200 justify-center items-center"}
           onPress={sendMessage}
         >
           <Feather name="send" size={20} color={inputText.trim() ? "#fff" : "#666"} />
@@ -174,143 +164,5 @@ const ChatScreen: React.FC<ChatScreenProps> = ({ navigation }) => {
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  botAvatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#149777',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 12,
-  },
-  headerInfo: {
-    flex: 1,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  headerSubtitle: {
-    fontSize: 14,
-    color: '#149777',
-    marginTop: 2,
-  },
-  quickActionsContainer: {
-    flexDirection: 'row',
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-    gap: 12,
-  },
-  quickActionButton: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderWidth: 1,
-    borderColor: '#149777',
-    borderRadius: 20,
-    backgroundColor: '#f8fffe',
-  },
-  quickActionText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#149777',
-    marginLeft: 8,
-  },
-  messagesContainer: {
-    flex: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-  },
-  messageContainer: {
-    marginVertical: 4,
-    maxWidth: '80%',
-  },
-  botMessage: {
-    alignSelf: 'flex-start',
-  },
-  userMessage: {
-    alignSelf: 'flex-end',
-  },
-  messageText: {
-    fontSize: 16,
-    lineHeight: 20,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderRadius: 18,
-  },
-  botMessageText: {
-    backgroundColor: '#fff',
-    color: '#333',
-  },
-  userMessageText: {
-    backgroundColor: '#149777',
-    color: '#fff',
-  },
-  timestamp: {
-    fontSize: 12,
-    marginTop: 4,
-    paddingHorizontal: 16,
-  },
-  botTimestamp: {
-    color: '#666',
-  },
-  userTimestamp: {
-    color: '#666',
-    textAlign: 'right',
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#fff',
-    borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
-  },
-  textInput: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 20,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    fontSize: 16,
-    maxHeight: 100,
-    marginRight: 12,
-  },
-  sendButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: '#f0f0f0',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  activeSendButton: {
-    backgroundColor: '#149777',
-  },
-});
 
 export default ChatScreen;

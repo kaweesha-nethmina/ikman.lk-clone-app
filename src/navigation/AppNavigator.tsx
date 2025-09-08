@@ -160,44 +160,13 @@ function AppNavigator() {
               // Special styling for Post Ad button with three circles
               return (
                 <View 
-                  style={{
-                    position: 'absolute',
-                    top: -30, // Adjusted overflow for new tab bar height
-                    backgroundColor: '#FFFFFF', // Outer light yellow/cream circle
-                    borderRadius: 25,
-                    width: 45,
-                    height: 45,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    shadowColor: '#000',
-                    shadowOffset: {
-                      width: 0,
-                      height: 2,
-                    },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 3.84,
-                    elevation: 5,
-                  }}
+                  className="absolute -top-7 bg-white rounded-full w-11 h-11 justify-center items-center shadow shadow-gray-400"
                 >
                   <View 
-                    style={{
-                      backgroundColor: '#fdc702', // Middle yellow circle - bigger
-                      borderRadius: 19,
-                      width: 40, // Bigger middle circle
-                      height: 40,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    }}
+                    className="bg-[#fdc702] rounded-full w-10 h-10 justify-center items-center"
                   >
                     <View 
-                      style={{
-                        backgroundColor: '#6b3506', // Inner orange circle - like border
-                        borderRadius: 10,
-                        width: 20, // Very small inner circle like border
-                        height: 20,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                      }}
+                      className="bg-[#6b3506] rounded-full w-5 h-5 justify-center items-center"
                     >
                       <Feather name={iconName} size={12} color="#fff" />
                     </View>

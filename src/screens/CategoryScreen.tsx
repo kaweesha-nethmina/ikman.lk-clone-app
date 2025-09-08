@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   SafeAreaView,
   FlatList,
   TouchableOpacity,
@@ -36,29 +35,29 @@ const CategoryScreen: React.FC<CategoryScreenProps> = ({ route, navigation }) =>
   );
 
   const ListEmptyComponent = () => (
-    <View style={styles.emptyContainer}>
+    <View className="flex-1 justify-center items-center py-25">
       <Feather name="inbox" size={64} color="#ccc" />
-      <Text style={styles.emptyTitle}>No ads found</Text>
-      <Text style={styles.emptyDescription}>
+      <Text className="text-2xl font-bold text-gray-700 mt-4 mb-2">No ads found</Text>
+      <Text className="text-base text-gray-500 text-center px-10">
         There are no ads in this category yet.
       </Text>
     </View>
   );
 
   const ListHeaderComponent = () => (
-    <View style={styles.headerContainer}>
-      <Text style={styles.resultCount}>
+    <View className="flex-row justify-between items-center px-4 py-4 bg-white mb-2">
+      <Text className="text-base text-gray-700 font-semibold">
         {categoryProducts.length} ads found in {categoryName}
       </Text>
-      <TouchableOpacity style={styles.filterButton}>
+      <TouchableOpacity className="flex-row items-center px-3 py-2 border border-[#149777] rounded-full">
         <Feather name="sliders" size={20} color="#149777" />
-        <Text style={styles.filterText}>Filter</Text>
+        <Text className="text-sm text-[#149777] ml-1.5 font-semibold">Filter</Text>
       </TouchableOpacity>
     </View>
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView className="flex-1 bg-gray-100">
       <FlatList
         key="categoryGrid"
         data={categoryProducts}
@@ -66,71 +65,12 @@ const CategoryScreen: React.FC<CategoryScreenProps> = ({ route, navigation }) =>
         keyExtractor={(item: Product) => item.id}
         numColumns={2}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.listContainer}
+        contentContainerStyle={{ paddingBottom: 20, paddingHorizontal: 8 }}
         ListHeaderComponent={ListHeaderComponent}
         ListEmptyComponent={ListEmptyComponent}
       />
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  listContainer: {
-    paddingBottom: 20,
-    paddingHorizontal: 8,
-  },
-  headerContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    backgroundColor: '#fff',
-    marginBottom: 8,
-  },
-  resultCount: {
-    fontSize: 16,
-    color: '#333',
-    fontWeight: '600',
-  },
-  filterButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    borderWidth: 1,
-    borderColor: '#149777',
-    borderRadius: 20,
-  },
-  filterText: {
-    fontSize: 14,
-    color: '#149777',
-    marginLeft: 6,
-    fontWeight: '600',
-  },
-  emptyContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 100,
-  },
-  emptyTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    marginTop: 16,
-    marginBottom: 8,
-  },
-  emptyDescription: {
-    fontSize: 16,
-    color: '#666',
-    textAlign: 'center',
-    paddingHorizontal: 40,
-  },
-});
 
 export default CategoryScreen;

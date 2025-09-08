@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { cn } from '../utils/cn';
 
 // Import types
 import { Category } from '../types';
@@ -12,68 +13,17 @@ interface CategoryCardProps {
 
 const CategoryCard: React.FC<CategoryCardProps> = ({ category, onPress }) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={() => onPress(category)}>
-      <View style={styles.iconContainer}>
+    <TouchableOpacity className="items-center justify-start my-2.5 mx-4 flex-1 max-w-[33%] h-[100px]" onPress={() => onPress(category)}>
+      <View className="w-[60px] h-[60px] rounded-full justify-center items-center mb-0 bg-[#f8fffe] border border-[#e8f5f3] shadow shadow-gray-400">
         <Feather 
           name={category.icon as any} 
           size={24} 
           color="#149777" 
-          style={styles.icon}
         />
       </View>
-      <Text style={styles.categoryName} numberOfLines={2}>{category.name}</Text>
+      <Text className="text-xs font-semibold text-center text-gray-700 mt-2 leading-3.5 w-full h-7 text-top px-1" numberOfLines={2}>{category.name}</Text>
     </TouchableOpacity>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginVertical: 10,
-    marginHorizontal: 15,
-    flex: 1,
-    maxWidth: '33%',
-    height: 100,
-  },
-  iconContainer: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 0,
-    backgroundColor: '#f8fffe',
-    borderWidth: 1,
-    borderColor: '#e8f5f3',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 3,
-    // Perfect icon alignment
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  categoryName: {
-    fontSize: 12,
-    fontWeight: '600',
-    textAlign: 'center',
-    color: '#333',
-    marginTop: 8,
-    lineHeight: 14,
-    width: '100%',
-    height: 28,
-    textAlignVertical: 'top',
-    paddingHorizontal: 4,
-  },
-  icon: {
-    textAlign: 'center',
-    textAlignVertical: 'center',
-  },
-});
 
 export default CategoryCard;

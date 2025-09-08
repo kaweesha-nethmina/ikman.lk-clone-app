@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   SafeAreaView,
   ScrollView,
   Image,
@@ -46,58 +45,58 @@ const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ route }) =>
   const renderDetailRow = (icon: string, label: string, value: string | undefined) => {
     if (!value) return null;
     return (
-      <View style={styles.detailRow}>
+      <View className="flex-row items-center mb-3">
         <Feather name={icon as any} size={18} color="#666" />
-        <Text style={styles.detailLabel}>{label}:</Text>
-        <Text style={styles.detailValue}>{value}</Text>
+        <Text className="text-base text-gray-500 ml-2 flex-1">{label}:</Text>
+        <Text className="text-base font-semibold text-gray-700 flex-2">{value}</Text>
       </View>
     );
   };
 
   if (!product) {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView className="flex-1">
         <Text>Product not found</Text>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView className="flex-1 bg-white">
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Product Image */}
-        <Image source={{ uri: product.image }} style={styles.productImage} />
+        <Image source={{ uri: product.image }} className="w-full h-[300px] bg-gray-200" />
         
         {/* Action Buttons */}
-        <View style={styles.actionButtonsContainer}>
-          <TouchableOpacity style={styles.actionButton} onPress={handleFavoritePress}>
+        <View className="absolute top-5 right-4 flex-col">
+          <TouchableOpacity className="bg-white/90 p-3 rounded-full mb-2 shadow shadow-gray-400" onPress={handleFavoritePress}>
             <Feather name="heart" size={24} color="#149777" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton} onPress={handleSharePress}>
+          <TouchableOpacity className="bg-white/90 p-3 rounded-full shadow shadow-gray-400" onPress={handleSharePress}>
             <Feather name="share-2" size={24} color="#149777" />
           </TouchableOpacity>
         </View>
 
         {/* Product Info */}
-        <View style={styles.productInfoContainer}>
-          <Text style={styles.productTitle}>{product.title}</Text>
-          <Text style={styles.productPrice}>{product.price}</Text>
+        <View className="p-5 border-b border-gray-200">
+          <Text className="text-2xl font-bold text-gray-700 mb-2">{product.title}</Text>
+          <Text className="text-3xl font-bold text-[#149777] mb-4">{product.price}</Text>
           
-          <View style={styles.locationTimeContainer}>
-            <View style={styles.locationContainer}>
+          <View className="flex-row justify-between">
+            <View className="flex-row items-center">
               <Feather name="map-pin" size={16} color="#666" />
-              <Text style={styles.locationText}>{product.location}</Text>
+              <Text className="text-base text-gray-500 ml-1.5">{product.location}</Text>
             </View>
-            <View style={styles.timeContainer}>
+            <View className="flex-row items-center">
               <Feather name="clock" size={16} color="#666" />
-              <Text style={styles.timeText}>{product.posted}</Text>
+              <Text className="text-sm text-gray-500 ml-1.5">{product.posted}</Text>
             </View>
           </View>
         </View>
 
         {/* Product Details */}
-        <View style={styles.detailsContainer}>
-          <Text style={styles.sectionTitle}>Details</Text>
+        <View className="p-5 border-b border-gray-200">
+          <Text className="text-xl font-bold text-gray-700 mb-4">Details</Text>
           
           {renderDetailRow('info', 'Condition', product.condition)}
           {renderDetailRow('calendar', 'Year', product.year)}
@@ -125,226 +124,46 @@ const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ route }) =>
         </View>
 
         {/* Description */}
-        <View style={styles.descriptionContainer}>
-          <Text style={styles.sectionTitle}>Description</Text>
-          <Text style={styles.descriptionText}>{product.description}</Text>
+        <View className="p-5 border-b border-gray-200">
+          <Text className="text-xl font-bold text-gray-700 mb-4">Description</Text>
+          <Text className="text-base leading-6 text-gray-700">{product.description}</Text>
         </View>
 
         {/* Seller Info */}
-        <View style={styles.sellerContainer}>
-          <Text style={styles.sectionTitle}>Seller Information</Text>
-          <View style={styles.sellerInfo}>
-            <View style={styles.sellerAvatar}>
+        <View className="p-5 mb-25">
+          <Text className="text-xl font-bold text-gray-700 mb-4">Seller Information</Text>
+          <View className="flex-row items-center">
+            <View className="w-12.5 h-12.5 rounded-full bg-[#149777] justify-center items-center mr-4">
               <Feather name="user" size={24} color="#fff" />
             </View>
-            <View style={styles.sellerDetails}>
-              <Text style={styles.sellerName}>{product.seller}</Text>
-              <Text style={styles.sellerPhone}>{product.phone}</Text>
+            <View className="flex-1">
+              <Text className="text-lg font-semibold text-gray-700 mb-1">{product.seller}</Text>
+              <Text className="text-base text-gray-500">{product.phone}</Text>
             </View>
           </View>
         </View>
       </ScrollView>
 
       {/* Contact Buttons */}
-      <View style={styles.contactButtonsContainer}>
+      <View className="absolute bottom-0 left-0 right-0 flex-row bg-white px-4 py-3 border-t border-gray-200">
         <TouchableOpacity 
-          style={[styles.contactButton, styles.messageButton]} 
+          className="flex-1 flex-row justify-center items-center py-4 rounded-lg mx-1 border-2 border-[#149777] bg-white"
           onPress={handleMessagePress}
         >
           <Feather name="message-circle" size={20} color="#149777" />
-          <Text style={styles.messageButtonText}>Message</Text>
+          <Text className="text-base font-semibold text-[#149777] ml-2">Message</Text>
         </TouchableOpacity>
         
         <TouchableOpacity 
-          style={[styles.contactButton, styles.callButton]} 
+          className="flex-1 flex-row justify-center items-center py-4 rounded-lg mx-1 bg-[#149777]"
           onPress={handleCallPress}
         >
           <Feather name="phone" size={20} color="#fff" />
-          <Text style={styles.callButtonText}>Call Now</Text>
+          <Text className="text-base font-semibold text-white ml-2">Call Now</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  productImage: {
-    width: '100%',
-    height: 300,
-    backgroundColor: '#f0f0f0',
-  },
-  actionButtonsContainer: {
-    position: 'absolute',
-    top: 20,
-    right: 16,
-    flexDirection: 'column',
-  },
-  actionButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    padding: 12,
-    borderRadius: 25,
-    marginBottom: 8,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  productInfoContainer: {
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  productTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 8,
-  },
-  productPrice: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: '#149777',
-    marginBottom: 16,
-  },
-  locationTimeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  locationContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  locationText: {
-    fontSize: 16,
-    color: '#666',
-    marginLeft: 6,
-  },
-  timeContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  timeText: {
-    fontSize: 14,
-    color: '#666',
-    marginLeft: 6,
-  },
-  detailsContainer: {
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
-    marginBottom: 16,
-  },
-  detailRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  detailLabel: {
-    fontSize: 16,
-    color: '#666',
-    marginLeft: 8,
-    flex: 1,
-  },
-  detailValue: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-    flex: 2,
-  },
-  descriptionContainer: {
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-  },
-  descriptionText: {
-    fontSize: 16,
-    lineHeight: 24,
-    color: '#333',
-  },
-  sellerContainer: {
-    padding: 20,
-    marginBottom: 100,
-  },
-  sellerInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  sellerAvatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: '#149777',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 16,
-  },
-  sellerDetails: {
-    flex: 1,
-  },
-  sellerName: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 4,
-  },
-  sellerPhone: {
-    fontSize: 16,
-    color: '#666',
-  },
-  contactButtonsContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    flexDirection: 'row',
-    backgroundColor: '#fff',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderTopWidth: 1,
-    borderTopColor: '#f0f0f0',
-  },
-  contactButton: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 16,
-    borderRadius: 8,
-    marginHorizontal: 4,
-  },
-  messageButton: {
-    backgroundColor: '#fff',
-    borderWidth: 2,
-    borderColor: '#149777',
-  },
-  messageButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#149777',
-    marginLeft: 8,
-  },
-  callButton: {
-    backgroundColor: '#149777',
-  },
-  callButtonText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#fff',
-    marginLeft: 8,
-  },
-});
 
 export default ProductDetailsScreen;

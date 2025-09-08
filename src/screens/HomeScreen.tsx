@@ -2,7 +2,6 @@ import React from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   SafeAreaView,
   ScrollView,
   FlatList,
@@ -78,46 +77,46 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
   );
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 bg-[#149777]">
       <StatusBar backgroundColor="#149777" barStyle="light-content" translucent={false} />
       
       {/* Header */}
-      <SafeAreaView style={styles.headerSafeArea}>
-        <View style={styles.header}>
-        <Text style={styles.headerTitle}>ikman.lk</Text>
-        <TouchableOpacity style={styles.searchButton} onPress={handleSearchButtonPress}>
-          <Feather name="search" size={24} color="#fff" />
-        </TouchableOpacity>
+      <SafeAreaView className="bg-[#149777]">
+        <View className="bg-[#149777] flex-row justify-between items-center px-5 py-4">
+          <Text className="text-2xl font-bold text-white">ikman.lk</Text>
+          <TouchableOpacity className="p-2" onPress={handleSearchButtonPress}>
+            <Feather name="search" size={24} color="#fff" />
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
 
-      <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollView}>
+      <ScrollView showsVerticalScrollIndicator={false} className="flex-1 bg-gray-100">
         {/* Location and Category Filters */}
-        <View style={styles.filtersContainer}>
-          <TouchableOpacity style={styles.filterItem}>
+        <View className="flex-row px-4 py-3 bg-white border-b border-gray-200 gap-2">
+          <TouchableOpacity className="flex-1 flex-row items-center py-3 px-3 bg-[#f8fffe] rounded-lg border border-[#e8f5f3]">
             <Feather name="map-pin" size={20} color="#149777" />
-            <Text style={styles.filterText} numberOfLines={1}>{selectedLocation}</Text>
+            <Text className="text-xs text-[#149777] font-semibold ml-1.5 flex-1" numberOfLines={1}>{selectedLocation}</Text>
           </TouchableOpacity>
           
-          <TouchableOpacity style={styles.filterItem}>
+          <TouchableOpacity className="flex-1 flex-row items-center py-3 px-3 bg-[#f8fffe] rounded-lg border border-[#e8f5f3]">
             <Feather name="grid" size={20} color="#149777" />
-            <Text style={styles.filterText} numberOfLines={1}>{selectedCategory}</Text>
+            <Text className="text-xs text-[#149777] font-semibold ml-1.5 flex-1" numberOfLines={1}>{selectedCategory}</Text>
           </TouchableOpacity>
           
-          <TouchableOpacity style={styles.filterItem}>
+          <TouchableOpacity className="flex-1 flex-row items-center py-3 px-3 bg-[#f8fffe] rounded-lg border border-[#e8f5f3]">
             <Feather name="sliders" size={20} color="#149777" />
-            <Text style={styles.filterText}>Filters</Text>
+            <Text className="text-xs text-[#149777] font-semibold ml-1.5">Filters</Text>
           </TouchableOpacity>
         </View>
 
         {/* Search Bar - Conditional Rendering */}
         {showSearchBar && (
-          <View style={styles.searchContainer}>
-            <View style={styles.searchBar}>
-              <Feather name="search" size={20} color="#666" style={styles.searchIcon} />
+          <View className="px-4 py-4">
+            <View className="flex-row items-center bg-white rounded-full px-4 py-3 shadow shadow-gray-400">
+              <Feather name="search" size={20} color="#666" />
               <TextInput
                 placeholder="What are you looking for?"
-                style={styles.searchInput}
+                className="flex-1 text-base text-gray-700 ml-2.5"
                 placeholderTextColor="#666"
                 value={searchText}
                 onChangeText={setSearchText}
@@ -125,7 +124,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
                 autoFocus={true}
               />
               <TouchableOpacity 
-                style={styles.closeButton} 
+                className="ml-2.5 p-1"
                 onPress={() => {
                   setShowSearchBar(false);
                   setSearchText('');
@@ -137,21 +136,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
           </View>
         )}
 
-        {/* Categories Section
-        <View style={styles.section}>
-          <FlatList
-            key="categories3Columns"
-            data={categories}
-            renderItem={renderCategoryItem}
-            keyExtractor={(item) => item.id}
-            numColumns={3}
-            scrollEnabled={false}
-            contentContainerStyle={styles.categoriesContainer}
-          />
-        </View> */}
-
         {/* Published Ads Section */}
-        <View style={styles.section}>
+        <View className="mb-6">
           <FlatList
             key="recentAdsGrid"
             data={getRecentProducts()}
@@ -160,120 +146,12 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
             numColumns={2}
             scrollEnabled={false}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.gridContainer}
+            contentContainerStyle={{ paddingHorizontal: 8 }}
           />
         </View>
       </ScrollView>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#149777',
-  },
-  headerSafeArea: {
-    backgroundColor: '#149777',
-  },
-  scrollView: {
-    flex: 1,
-    backgroundColor: '#f5f5f5',
-  },
-  header: {
-    backgroundColor: '#149777',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingVertical: 15,
-    elevation: 4,
-    // shadowColor: '#000',
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 3.84,
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#fff',
-  },
-  searchButton: {
-    padding: 8,
-  },
-  filtersContainer: {
-    flexDirection: 'row',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    backgroundColor: '#fff',
-    borderBottomWidth: 1,
-    borderBottomColor: '#f0f0f0',
-    gap: 8,
-  },
-  filterItem: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 12,
-    backgroundColor: '#f8fffe',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#e8f5f3',
-  },
-  filterText: {
-    fontSize: 12,
-    color: '#149777',
-    fontWeight: '600',
-    marginLeft: 6,
-    flex: 1,
-  },
-  searchContainer: {
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-  },
-  searchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 25,
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 3,
-  },
-  searchIcon: {
-    marginRight: 10,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: 16,
-    color: '#333',
-  },
-  closeButton: {
-    marginLeft: 10,
-    padding: 4,
-  },
-  section: {
-    marginBottom: 24,
-  },
-  categoriesContainer: {
-    paddingHorizontal: 8,
-    justifyContent: 'space-between',
-    alignItems: 'stretch',
-  },
-  gridContainer: {
-    paddingHorizontal: 8,
-  },
-});
 
 export default HomeScreen;
