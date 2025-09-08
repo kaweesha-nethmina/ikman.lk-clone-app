@@ -1,4 +1,7 @@
-export const products = {
+// Import types
+import { Product, MyAd } from '../types';
+
+export const products: { [key: string]: Product[] } = {
   '1': [ // Cars
     {
       id: 'car1',
@@ -311,7 +314,7 @@ export const products = {
   ]
 };
 
-export const myAds = [
+export const myAds: MyAd[] = [
   {
     id: 'myad1',
     title: 'iPhone 13 Pro Max',
@@ -321,7 +324,9 @@ export const myAds = [
     status: 'Active',
     views: 45,
     posted: '3 days ago',
-    category: 'Electronics'
+    category: 'Electronics',
+    seller: 'Unknown',
+    phone: 'Unknown'
   },
   {
     id: 'myad2',
@@ -332,6 +337,8 @@ export const myAds = [
     status: 'Sold',
     views: 123,
     posted: '2 weeks ago',
-    category: 'Cars'
+    category: 'Cars',
+    seller: 'Unknown',
+    phone: 'Unknown'
   }
 ];

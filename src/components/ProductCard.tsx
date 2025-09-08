@@ -2,7 +2,16 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const ProductCard = ({ product, onPress, isGrid = false }) => {
+// Import types
+import { Product } from '../types';
+
+interface ProductCardProps {
+  product: Product;
+  onPress: (product: Product) => void;
+  isGrid?: boolean;
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({ product, onPress, isGrid = false }) => {
   return (
     <TouchableOpacity 
       style={[styles.container, isGrid && styles.gridContainer]} 

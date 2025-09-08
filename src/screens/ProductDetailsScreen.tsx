@@ -12,11 +12,21 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const ProductDetailsScreen = ({ route }) => {
+// Import types
+import { Product, RouteParams } from '../types';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+
+type RootStackParamList = {
+  ProductDetails: RouteParams;
+};
+
+type ProductDetailsScreenProps = NativeStackScreenProps<RootStackParamList, 'ProductDetails'>;
+
+const ProductDetailsScreen: React.FC<ProductDetailsScreenProps> = ({ route }) => {
   const { product } = route.params;
 
   const handleCallPress = () => {
-    if (product.phone) {
+    if (product?.phone) {
       Linking.openURL(`tel:${product.phone}`);
     }
   };
@@ -33,16 +43,24 @@ const ProductDetailsScreen = ({ route }) => {
     Alert.alert('Favorite', 'Added to favorites!');
   };
 
-  const renderDetailRow = (icon, label, value) => {
+  const renderDetailRow = (icon: string, label: string, value: string | undefined) => {
     if (!value) return null;
     return (
       <View style={styles.detailRow}>
-        <Feather name={icon} size={18} color="#666" />
+        <Feather name={icon as any} size={18} color="#666" />
         <Text style={styles.detailLabel}>{label}:</Text>
         <Text style={styles.detailValue}>{value}</Text>
       </View>
     );
   };
+
+  if (!product) {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text>Product not found</Text>
+      </SafeAreaView>
+    );
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -97,6 +115,13 @@ const ProductDetailsScreen = ({ route }) => {
           {renderDetailRow('droplet', 'Bathrooms', product.bathrooms)}
           {renderDetailRow('square', 'Land Size', product.landSize)}
           {renderDetailRow('check-circle', 'Furnished', product.furnished)}
+          {renderDetailRow('smartphone', 'Storage', product.storage)}
+          {renderDetailRow('package', 'Size', product.size)}
+          {renderDetailRow('weight', 'Weight', product.weight)}
+          {renderDetailRow('tool', 'Service Type', product.serviceType)}
+          {renderDetailRow('calendar', 'Availability', product.availability)}
+          {renderDetailRow('book', 'Subject', product.subject)}
+          {renderDetailRow('award', 'Level', product.level)}
         </View>
 
         {/* Description */}

@@ -13,9 +13,19 @@ import { Feather } from '@expo/vector-icons';
 import CategoryCard from '../components/CategoryCard';
 import { categories } from '../data/categories';
 
-const SearchScreen = ({ navigation, route }) => {
-  const [searchText, setSearchText] = useState('');
-  const [selectedLocation, setSelectedLocation] = useState('All Sri Lanka');
+// Import types
+import { Category, RouteParams } from '../types';
+
+interface SearchScreenProps {
+  navigation: any;
+  route: {
+    params?: RouteParams;
+  };
+}
+
+const SearchScreen: React.FC<SearchScreenProps> = ({ navigation, route }) => {
+  const [searchText, setSearchText] = useState<string>('');
+  const [selectedLocation, setSelectedLocation] = useState<string>('All Sri Lanka');
 
   // Handle search query from navigation params
   useEffect(() => {
@@ -24,7 +34,7 @@ const SearchScreen = ({ navigation, route }) => {
     }
   }, [route.params?.searchQuery]);
 
-  const locations = [
+  const locations: string[] = [
     'All Sri Lanka',
     'Colombo',
     'Kandy',
@@ -35,7 +45,7 @@ const SearchScreen = ({ navigation, route }) => {
     'Anuradhapura',
   ];
 
-  const handleCategoryPress = (category) => {
+  const handleCategoryPress = (category: Category) => {
     navigation.navigate('Category', { 
       categoryId: category.id,
       categoryName: category.name,
@@ -48,7 +58,7 @@ const SearchScreen = ({ navigation, route }) => {
     console.log('Searching for:', searchText, 'in', selectedLocation);
   };
 
-  const renderCategoryItem = ({ item }) => (
+  const renderCategoryItem = ({ item }: { item: Category }) => (
     <CategoryCard category={item} onPress={handleCategoryPress} />
   );
 
@@ -86,7 +96,7 @@ const SearchScreen = ({ navigation, route }) => {
             key="searchCategories3Columns"
             data={categories}
             renderItem={renderCategoryItem}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item: Category) => item.id}
             numColumns={3}
             scrollEnabled={false}
             contentContainerStyle={styles.categoriesContainer}

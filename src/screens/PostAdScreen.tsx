@@ -14,10 +14,25 @@ import { Feather } from '@expo/vector-icons';
 import CategoryCard from '../components/CategoryCard';
 import { categories } from '../data/categories';
 
-const PostAdScreen = ({ navigation }) => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [adDetails, setAdDetails] = useState({
+// Import types
+import { Category } from '../types';
+
+interface AdDetails {
+  title: string;
+  description: string;
+  price: string;
+  location: string;
+  condition: string;
+}
+
+interface PostAdScreenProps {
+  navigation: any;
+}
+
+const PostAdScreen: React.FC<PostAdScreenProps> = ({ navigation }) => {
+  const [currentStep, setCurrentStep] = useState<number>(1);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+  const [adDetails, setAdDetails] = useState<AdDetails>({
     title: '',
     description: '',
     price: '',
@@ -25,7 +40,7 @@ const PostAdScreen = ({ navigation }) => {
     condition: '',
   });
 
-  const handleCategorySelect = (category) => {
+  const handleCategorySelect = (category: Category) => {
     setSelectedCategory(category);
     setCurrentStep(2);
   };
@@ -48,7 +63,7 @@ const PostAdScreen = ({ navigation }) => {
     ]);
   };
 
-  const renderCategoryItem = ({ item }) => (
+  const renderCategoryItem = ({ item }: { item: Category }) => (
     <CategoryCard category={item} onPress={handleCategorySelect} />
   );
 
@@ -62,8 +77,8 @@ const PostAdScreen = ({ navigation }) => {
             <FlatList
               data={categories}
               renderItem={renderCategoryItem}
-              keyExtractor={(item) => item.id}
-              numColumns={4}
+              keyExtractor={(item: Category) => item.id}
+              numColumns={3}
               scrollEnabled={false}
               contentContainerStyle={styles.categoriesContainer}
             />

@@ -2,8 +2,16 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const MyAdCard = ({ ad, onPress }) => {
-  const getStatusColor = (status) => {
+// Import types
+import { MyAd } from '../types';
+
+interface MyAdCardProps {
+  ad: MyAd;
+  onPress: (ad: MyAd) => void;
+}
+
+const MyAdCard: React.FC<MyAdCardProps> = ({ ad, onPress }) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'Active':
         return '#4CAF50';

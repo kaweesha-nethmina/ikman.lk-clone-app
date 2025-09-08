@@ -11,20 +11,31 @@ import {
   StatusBar,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+
+// Import components
 import CategoryCard from '../components/CategoryCard';
 import ProductCard from '../components/ProductCard';
+
+// Import data
 import { categories } from '../data/categories';
 import { products } from '../data/products';
 
-const HomeScreen = ({ navigation }) => {
-  const [selectedLocation, setSelectedLocation] = React.useState('All Sri Lanka');
-  const [selectedCategory, setSelectedCategory] = React.useState('All Categories');
-  const [showSearchBar, setShowSearchBar] = React.useState(false);
-  const [searchText, setSearchText] = React.useState('');
+// Import types
+import { Category, Product } from '../types';
+
+interface HomeScreenProps {
+  navigation: any;
+}
+
+const HomeScreen: React.FC<HomeScreenProps> = ({ navigation }) => {
+  const [selectedLocation, setSelectedLocation] = React.useState<string>('All Sri Lanka');
+  const [selectedCategory, setSelectedCategory] = React.useState<string>('All Categories');
+  const [showSearchBar, setShowSearchBar] = React.useState<boolean>(false);
+  const [searchText, setSearchText] = React.useState<string>('');
 
   // Get recent products from all categories
-  const getRecentProducts = () => {
-    const allProducts = [];
+  const getRecentProducts = (): (Product & { categoryId?: string })[] => {
+    const allProducts: (Product & { categoryId?: string })[] = [];
     Object.keys(products).forEach(categoryId => {
       products[categoryId].forEach(product => {
         allProducts.push({ ...product, categoryId });
@@ -33,7 +44,7 @@ const HomeScreen = ({ navigation }) => {
     return allProducts.slice(0, 10); // Show first 10 products
   };
 
-  const handleCategoryPress = (category) => {
+  const handleCategoryPress = (category: Category) => {
     console.log('Category clicked:', category.name); // Debug message
     navigation.navigate('Category', { 
       categoryId: category.id,
@@ -42,7 +53,7 @@ const HomeScreen = ({ navigation }) => {
     });
   };
 
-  const handleProductPress = (product) => {
+  const handleProductPress = (product: Product & { categoryId?: string }) => {
     navigation.navigate('ProductDetails', { product });
   };
 
@@ -58,11 +69,11 @@ const HomeScreen = ({ navigation }) => {
     }
   };
 
-  const renderCategoryItem = ({ item }) => (
+  const renderCategoryItem = ({ item }: { item: Category }) => (
     <CategoryCard category={item} onPress={handleCategoryPress} />
   );
 
-  const renderProductItem = ({ item }) => (
+  const renderProductItem = ({ item }: { item: Product & { categoryId?: string } }) => (
     <ProductCard product={item} onPress={handleProductPress} isGrid={true} />
   );
 

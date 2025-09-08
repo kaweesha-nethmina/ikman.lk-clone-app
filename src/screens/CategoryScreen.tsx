@@ -11,15 +11,27 @@ import ProductCard from '../components/ProductCard';
 import { products } from '../data/products';
 import { Feather } from '@expo/vector-icons';
 
-const CategoryScreen = ({ route, navigation }) => {
-  const { categoryId, categoryName, categoryColor } = route.params;
-  const categoryProducts = products[categoryId] || [];
+// Import types
+import { Product, RouteParams } from '../types';
 
-  const handleProductPress = (product) => {
+interface CategoryScreenProps {
+  route: {
+    params: RouteParams;
+  };
+  navigation: {
+    navigate: (screen: string, params: any) => void;
+  };
+}
+
+const CategoryScreen: React.FC<CategoryScreenProps> = ({ route, navigation }) => {
+  const { categoryId, categoryName, categoryColor } = route.params;
+  const categoryProducts: Product[] = products[categoryId || ''] || [];
+
+  const handleProductPress = (product: Product) => {
     navigation.navigate('ProductDetails', { product });
   };
 
-  const renderProductItem = ({ item }) => (
+  const renderProductItem = ({ item }: { item: Product }) => (
     <ProductCard product={item} onPress={handleProductPress} isGrid={true} />
   );
 
@@ -51,7 +63,7 @@ const CategoryScreen = ({ route, navigation }) => {
         key="categoryGrid"
         data={categoryProducts}
         renderItem={renderProductItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item: Product) => item.id}
         numColumns={2}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContainer}

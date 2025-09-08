@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -11,11 +11,11 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const ProfileScreen = () => {
-  const [notificationsEnabled, setNotificationsEnabled] = React.useState(true);
-  const [locationEnabled, setLocationEnabled] = React.useState(true);
+const ProfileScreen: React.FC = () => {
+  const [notificationsEnabled, setNotificationsEnabled] = useState<boolean>(true);
+  const [locationEnabled, setLocationEnabled] = useState<boolean>(true);
 
-  const handleMenuPress = (title) => {
+  const handleMenuPress = (title: string) => {
     Alert.alert(title, `You pressed ${title}`);
   };
 
@@ -30,11 +30,19 @@ const ProfileScreen = () => {
     );
   };
 
-  const MenuItem = ({ icon, title, onPress, rightComponent, showArrow = true }) => (
+  interface MenuItemProps {
+    icon: string;
+    title: string;
+    onPress: () => void;
+    rightComponent?: React.ReactNode;
+    showArrow?: boolean;
+  }
+
+  const MenuItem: React.FC<MenuItemProps> = ({ icon, title, onPress, rightComponent, showArrow = true }) => (
     <TouchableOpacity style={styles.menuItem} onPress={onPress}>
       <View style={styles.menuItemLeft}>
         <View style={styles.menuIconContainer}>
-          <Feather name={icon} size={20} color="#149777" />
+          <Feather name={icon as any} size={20} color="#149777" />
         </View>
         <Text style={styles.menuItemText}>{title}</Text>
       </View>
@@ -45,7 +53,11 @@ const ProfileScreen = () => {
     </TouchableOpacity>
   );
 
-  const SectionHeader = ({ title }) => (
+  interface SectionHeaderProps {
+    title: string;
+  }
+
+  const SectionHeader: React.FC<SectionHeaderProps> = ({ title }) => (
     <Text style={styles.sectionHeader}>{title}</Text>
   );
 

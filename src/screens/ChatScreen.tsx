@@ -11,8 +11,24 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const ChatScreen = ({ navigation }) => {
-  const [messages, setMessages] = useState([
+// Define types
+interface Message {
+  id: number;
+  text: string;
+  isBot: boolean;
+  timestamp: string;
+}
+
+interface BotResponses {
+  [key: string]: string;
+}
+
+interface ChatScreenProps {
+  navigation: any;
+}
+
+const ChatScreen: React.FC<ChatScreenProps> = ({ navigation }) => {
+  const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
       text: "Hi! I'm your Ikman.lk assistant. How can I help you today?",
@@ -20,9 +36,9 @@ const ChatScreen = ({ navigation }) => {
       timestamp: new Date().toLocaleTimeString(),
     }
   ]);
-  const [inputText, setInputText] = useState('');
+  const [inputText, setInputText] = useState<string>('');
 
-  const botResponses = {
+  const botResponses: BotResponses = {
     'browse': "Great! You can browse ads by categories or search for specific items. Would you like me to help you find something specific?",
     'post': "To post an ad, click on the 'Post Ad' button in the bottom navigation. I'll guide you through the process step by step!",
     'help': "I can help you with:\n• Browsing ads\n• Posting ads\n• Search tips\n• Account settings\n\nWhat would you like to know more about?",
@@ -33,7 +49,7 @@ const ChatScreen = ({ navigation }) => {
   const sendMessage = () => {
     if (inputText.trim() === '') return;
 
-    const userMessage = {
+    const userMessage: Message = {
       id: messages.length + 1,
       text: inputText,
       isBot: false,
@@ -57,7 +73,7 @@ const ChatScreen = ({ navigation }) => {
         response = botResponses.search;
       }
 
-      const botMessage = {
+      const botMessage: Message = {
         id: messages.length + 2,
         text: response,
         isBot: true,
@@ -70,7 +86,7 @@ const ChatScreen = ({ navigation }) => {
     setInputText('');
   };
 
-  const handleQuickAction = (action) => {
+  const handleQuickAction = (action: string) => {
     if (action === 'browse') {
       navigation.navigate('Home');
     } else if (action === 'post') {
@@ -78,7 +94,7 @@ const ChatScreen = ({ navigation }) => {
     }
   };
 
-  const renderMessage = (message) => (
+  const renderMessage = (message: Message) => (
     <View key={message.id} style={[
       styles.messageContainer,
       message.isBot ? styles.botMessage : styles.userMessage

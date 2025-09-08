@@ -12,21 +12,28 @@ import MyAdCard from '../components/MyAdCard';
 import { myAds } from '../data/products';
 import { Feather } from '@expo/vector-icons';
 
-const MyAdsScreen = ({ navigation }) => {
-  const [activeTab, setActiveTab] = useState('all');
+// Import types
+import { MyAd } from '../types';
 
-  const getFilteredAds = () => {
+interface MyAdsScreenProps {
+  navigation: any;
+}
+
+const MyAdsScreen: React.FC<MyAdsScreenProps> = ({ navigation }) => {
+  const [activeTab, setActiveTab] = useState<string>('all');
+
+  const getFilteredAds = (): MyAd[] => {
     switch (activeTab) {
       case 'active':
-        return myAds.filter(ad => ad.status === 'Active');
+        return myAds.filter((ad: MyAd) => ad.status === 'Active');
       case 'sold':
-        return myAds.filter(ad => ad.status === 'Sold');
+        return myAds.filter((ad: MyAd) => ad.status === 'Sold');
       default:
         return myAds;
     }
   };
 
-  const handleAdPress = (ad) => {
+  const handleAdPress = (ad: MyAd) => {
     Alert.alert('My Ad', `You clicked on ${ad.title}`);
   };
 
@@ -34,11 +41,17 @@ const MyAdsScreen = ({ navigation }) => {
     Alert.alert('Post Ad', 'This would open the post ad screen');
   };
 
-  const renderAdItem = ({ item }) => (
+  const renderAdItem = ({ item }: { item: MyAd }) => (
     <MyAdCard ad={item} onPress={handleAdPress} />
   );
 
-  const TabButton = ({ title, isActive, onPress }) => (
+  interface TabButtonProps {
+    title: string;
+    isActive: boolean;
+    onPress: () => void;
+  }
+
+  const TabButton: React.FC<TabButtonProps> = ({ title, isActive, onPress }) => (
     <TouchableOpacity
       style={[styles.tabButton, isActive && styles.activeTabButton]}
       onPress={onPress}
@@ -101,7 +114,7 @@ const MyAdsScreen = ({ navigation }) => {
       <FlatList
         data={getFilteredAds()}
         renderItem={renderAdItem}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item: MyAd) => item.id}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContainer}
         ListHeaderComponent={ListHeaderComponent}

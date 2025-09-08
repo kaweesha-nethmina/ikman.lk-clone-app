@@ -15,8 +15,25 @@ import ChatScreen from '../screens/ChatScreen';
 import MyAdsScreen from '../screens/MyAdsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 
+// Import types
+import { RouteParams } from '../types';
+
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+
+// Define route prop types
+type SearchStackParamList = {
+  SearchMain: undefined;
+  Category: RouteParams;
+  ProductDetails: RouteParams;
+};
+
+type HomeStackParamList = {
+  HomeMain: undefined;
+  Category: RouteParams;
+  ProductDetails: RouteParams;
+  PostAd: undefined;
+};
 
 // Stack Navigator for Search flow
 function SearchStackNavigator() {
@@ -39,8 +56,8 @@ function SearchStackNavigator() {
       />
       <Stack.Screen 
         name="Category" 
-        component={CategoryScreen}
-        options={({ route }) => ({
+        component={CategoryScreen as any}
+        options={({ route }: any) => ({
           title: route.params?.categoryName || 'Category',
           headerStyle: {
             backgroundColor: '#149777',
@@ -53,7 +70,7 @@ function SearchStackNavigator() {
       />
       <Stack.Screen 
         name="ProductDetails" 
-        component={ProductDetailsScreen}
+        component={ProductDetailsScreen as any}
         options={{
           title: 'Product Details',
           headerStyle: {
@@ -68,6 +85,7 @@ function SearchStackNavigator() {
     </Stack.Navigator>
   );
 }
+
 function HomeStackNavigator() {
   return (
     <Stack.Navigator>
@@ -80,8 +98,8 @@ function HomeStackNavigator() {
       />
       <Stack.Screen 
         name="Category" 
-        component={CategoryScreen}
-        options={({ route }) => ({
+        component={CategoryScreen as any}
+        options={({ route }: any) => ({
           title: route.params?.categoryName || 'Category',
           headerStyle: {
             backgroundColor: '#149777',
@@ -94,7 +112,7 @@ function HomeStackNavigator() {
       />
       <Stack.Screen 
         name="ProductDetails" 
-        component={ProductDetailsScreen}
+        component={ProductDetailsScreen as any}
         options={{
           title: 'Product Details',
           headerStyle: {
@@ -130,8 +148,8 @@ function AppNavigator() {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
+          tabBarIcon: ({ focused, color, size }: { focused: boolean; color: string; size: number }) => {
+            let iconName: any;
 
             if (route.name === 'Home') {
               iconName = 'home';

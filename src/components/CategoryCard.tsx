@@ -1,13 +1,21 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-const CategoryCard = ({ category, onPress }) => {
+// Import types
+import { Category } from '../types';
+
+interface CategoryCardProps {
+  category: Category;
+  onPress: (category: Category) => void;
+}
+
+const CategoryCard: React.FC<CategoryCardProps> = ({ category, onPress }) => {
   return (
     <TouchableOpacity style={styles.container} onPress={() => onPress(category)}>
       <View style={styles.iconContainer}>
         <Feather 
-          name={category.icon} 
+          name={category.icon as any} 
           size={24} 
           color="#149777" 
           style={styles.icon}
